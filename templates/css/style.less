@@ -1,0 +1,900 @@
+/*
+   This stylesheet was written in and compiled with LESS
+   See http://lesscss.org for further reference
+*/
+
+// ### VARIABLES ### 
+
+@bg: #d7d4cd;
+
+@text: #000;
+
+@link: @text;
+
+@font-one: 'Source Code Pro', Arial, sans-serif;
+@font-two: sans-serif;
+
+@line-height: 1.4;
+
+@opacity: 0.15;
+@opacity-hover: 0.3;
+
+@border: 1px solid rgba( 0,0,0, @opacity );
+
+@transition-duration: 250ms;
+
+@scrollbar-color: rgba( 0,0,0, @opacity );
+@scrollbar-color-alpha: 50%;
+@scrollbar-color-alpha-hover: 100%;
+
+@smaller-em: 48em;
+@smaller: ~'only screen and ( max-width: @{smaller-em} )';
+
+
+// ### MIXINS ###
+
+
+
+// ### DOCUMENT ### 
+
+html {
+  // enhanced typography
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga', 'dlig', 'kern'; 
+  text-size-adjust: 100%;
+}
+
+html, body {
+  // min-height: 100%;
+  margin: 0;
+  
+  background: @bg;
+}
+
+body {
+  position: relative;
+
+  font-family: @font-one;
+  font-size: 120%;
+  font-weight: 300;
+  line-height: @line-height;
+  
+  color: @text;
+}
+
+// sync breakpoints between CSS and JS
+
+title {
+  // em value only
+  width: @smaller-em;
+  // whole media query
+  font-family: '@{smaller}';
+
+}
+
+
+// ### BASICS ###
+
+a {
+  color: @link;
+  text-decoration: none;
+}
+
+a:visited {
+  // color: desaturate( @link, 5% );
+}
+
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  // color: ;
+  outline: 0; // do somethig else for a11y
+}
+
+::selection {
+  background: @link;
+  color: @bg;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+
+  margin: 0;
+
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: 1;
+
+  & a {
+
+
+    &:hover,
+    &:active,
+    &:focus {
+
+    }
+
+  }
+
+}
+
+
+h1 {
+  float: left;
+  margin: 1em;
+
+
+  & a {
+
+
+    &:hover,
+    &:active,
+    &:focus {
+
+    }
+
+  }
+
+}
+
+h2 {
+
+
+  & a {
+
+
+    &:hover,
+    &:active,
+    &:focus {
+
+    }
+
+  }
+
+}
+
+
+h3 {
+
+
+  & a {
+
+
+    &:hover,
+    &:active,
+    &:focus {
+
+    }
+
+  }
+
+}
+
+h4 {
+
+
+  & a {
+
+
+    &:hover,
+    &:active,
+    &:focus {
+
+    }
+
+  }
+
+}
+
+h5 {
+
+
+  & a {
+
+
+    &:hover,
+    &:active,
+    &:focus {
+
+    }
+
+  }
+
+}
+
+
+// ### STRUCTURE ###
+
+.shell {
+  // position: relative;
+  width: 98%;
+  max-width: 56em;
+  margin: 0 auto;
+  padding: 6em 0 3em;
+}
+
+.head {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 13; // lucky number ;)
+
+  background: @bg;
+  border-bottom: @border;
+}
+
+// ### HEADER ###
+
+.head {
+
+}
+
+h1 {
+
+}
+
+h1 a {
+
+}
+
+nav {
+  float: right;
+}
+
+nav > a {
+  float: right;
+  padding: 1em;
+
+  line-height: 1;
+
+  border-left: @border;
+
+  .button;
+
+  &:hover,
+  &:active,
+  &:active {
+
+  }
+
+}
+
+nav > a.login {
+  display: none;
+}
+
+@media @smaller {
+
+  nav > a.login {
+    display: block;
+  }
+
+}
+
+
+
+
+// ### CONTENT ###
+
+p {
+  margin: 0 0 ( 0em * @line-height ) 0;
+}
+
+p + p {
+
+}
+
+// imagelist 
+.imagelist {
+  margin: 0 3em;
+  padding: 0;
+  list-style-type: none;
+}
+
+.imagelist > li { 
+  position: relative;
+  clear: left;
+  margin: 0 0 12em 0;
+  padding: 0;
+}
+
+.imagelist > li > a { 
+  position: relative;
+  display: block;
+  margin: 0 -3em;
+  padding: 0 3em;
+}
+
+.imagelist > li img {
+  display: block;
+  width: 100%;
+
+  border: @border;
+}
+
+.imagelist > li > p {
+  float: left;
+  width: 100%;
+  margin: 1em 0 0 0;
+}
+
+// metalist 
+.metalist {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+} 
+
+.metalist > li {
+  margin: 0;
+  padding: 0;
+}
+
+.time {
+
+}
+
+.time > span {
+
+}
+
+.time > .day {
+
+}
+
+.time > .month {
+  
+}
+
+.time > .year {
+  
+}
+
+.health {
+  position: absolute;
+  right: -3em;
+  top: 0;
+  bottom: 1px;
+
+  margin: 0 -3px 0 0 !important;
+
+  border: @border;
+  border-left: 0;
+
+  transform: scaleX( 0 );
+  transform-origin: 0 0;
+  transition: all @transition-duration ease;
+}
+
+li:hover .health {
+  transform: scaleX( 1 );
+}
+
+.health > .chart {
+  position: relative;
+  display: block;
+  width: 3em;
+  height: 100%;
+
+  text-align: center;
+
+  &::after {
+    content: ' ';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    display: block;
+    width: 100%;
+    height: 50%;
+
+    background: rgba( 0,0,0, @opacity );
+    border-top: @border;
+  }
+}
+
+.health > .chart > .number {
+  position: absolute;
+  left: 0;
+  bottom: 1em;
+  display: block;
+  width: 100%;
+  height: 1em;
+}
+
+
+
+// tools
+
+.tools {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  margin: 0 0 0 -3em;
+
+  transform: scaleX( 0 );
+  transform-origin: 100% 0;
+  transition: all @transition-duration ease;
+}
+
+
+li:hover .tools {
+  transform: scaleX( 1 );
+}
+
+.tools > a {
+  display: block;
+  width: 3em;
+  height: 1em;
+  padding: 1em 0;
+
+  line-height: 1;
+  text-align: center;
+  text-indent: 100%;
+
+  border: @border;
+  border-right: 0;
+
+  white-space: nowrap;
+  overflow: hidden;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: rgba( 0,0,0, @opacity );
+  }
+
+  &::before {
+    content: ' ';
+    float: left;
+    width: 100%;
+    height: 0.5em;
+
+    font-size: 150%;
+    line-height: 0.75em;
+    text-align: center;
+    text-indent: 0;
+
+  }
+}
+
+.tools .delete {
+
+  &::before {
+    content: '\00D7';
+  }
+}
+
+// pagination 
+
+.pagination {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  width: 100%;
+  height: 3em;
+
+  line-height: 1;
+
+  border-top: @border;
+}
+
+/*
+.loggedin .pagination {
+  bottom: 3em;
+  margin-bottom: 6px;
+}
+*/
+
+.pagination > a {
+  display: block;
+  padding: 1em;
+
+  .button;
+}
+
+.pagination > .newer {
+  float: left;
+  border-right: @border;
+}
+
+.pagination > .older {
+  float: right;
+  border-left: @border;
+}
+
+.pagination > .current {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: block;
+  width: 4em;
+  margin: 0 auto;
+  padding: 1em;
+
+  color: rgba( 0,0,0, @opacity-hover );
+  text-align: center;
+}
+
+// forms 
+
+form {
+  float: left;
+  border-left: @border; 
+}
+
+input,
+textarea {
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 1em;
+
+  font-family: @font-one;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: 1;
+  color: @text;
+
+  background: none;
+  border: none;
+  border-right: @border;
+
+  &::placeholder {
+    color: rgba( 0,0,0, @opacity-hover );
+  }
+}
+
+input {
+  height: 3em;
+  padding: 0 1em;
+  line-height: 3em;
+}
+
+input[type='submit'],
+input[type='reset'],
+input[type='button'],
+button,
+.button {
+  cursor: pointer;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: rgba( 0,0,0, @opacity );
+  }
+}
+
+// login
+
+.loginform {
+  float: right;
+}
+
+.loginform input:last-child {
+  border-right: 0;
+}
+
+@media @smaller {
+
+  .loginform {
+    position: absolute;
+    top: -14em;
+    left: 0;
+    right: 0;
+
+    clear: both;
+    float: none;
+    margin-top: 1px;
+
+    background: @bg;
+
+    trabnsition: all @transition-duration ease;
+  }
+
+  .loginform:target {
+    top: 3em;
+  }
+
+  .loginform > input {
+    float: none;
+    width: 100%;
+    margin: 0;
+
+    text-align: left;
+
+    border-right: 0;
+    border-bottom: @border;
+
+  }
+
+  .loginform > input[type='submit'] {
+    text-align: center;
+  }
+
+}
+
+
+// upload
+
+.uploadform {
+  position: fixed;
+  left: 0;
+  bottom: -4em;
+  right: 0;
+  z-index: 17;
+
+  margin: 0;
+
+  background: @bg;
+  border-top: @border;
+
+  transition: all @transition-duration ease;
+}
+
+.uploadform:target {
+  bottom: 0;
+}
+
+.uploadform > .close {
+  float: right;
+  width: 3em;
+  padding: 1em 0;
+
+  padding: 1em 0;
+
+  line-height: 1;
+  text-align: center;
+  text-indent: 100%;
+
+  white-space: nowrap;
+  overflow: hidden;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: rgba( 0,0,0, @opacity );
+  }
+
+  &::before {
+    content: '\00D7';
+    float: left;
+    width: 100%;
+    height: 0.5em;
+
+    font-size: 150%;
+    line-height: 0.75em;
+    text-align: center;
+    text-indent: 0;
+
+  }
+}
+
+.uploadform > h3 { 
+  float: left;
+  padding: 1em;
+  border-right: @border;
+}
+
+.uploadform > input {
+
+}
+
+.uploadform > .file {
+  position: relative;
+  float: left;
+  padding: 1em;
+
+  line-height: 1;
+
+  border-right: @border;
+  overflow: hidden;
+}
+
+.uploadform > .file > input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  opacity: 0;
+
+  cursor: pointer;
+}
+
+.uploadform > .file.empty {
+  left: 0;
+  opacity: 1;
+}
+
+.uploadform > input[type='submit'] {
+  float: right;
+  border-left: @border;
+}
+
+@media @smaller {
+
+  .uploadform {
+    float: none;
+    bottom: -14em;
+  }
+
+  .uploadform > h3,
+  .uploadform > input,
+  .uploadform > .file {
+    display: block;
+    width: 100%;
+    float: none !important;
+
+    text-align: left;
+
+    border-right: 0;
+    border-bottom: @border;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  .uploadform > h3 {
+
+  }
+
+}
+
+
+// messages 
+
+.messagelist {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  z-index: 15;
+
+  display: block;
+  width: 40%;
+  margin: 0 0 0 -20%;
+  padding: 0;
+  list-style-type: none;
+
+  background: @bg;
+  border: @border;
+
+  animation: fadeOutSlow 4s;
+  animation-fill-mode: forwards;
+}
+
+.messagelist > li { 
+  position: relative;
+  padding: 1em;
+  padding-left: 4em;
+  border-bottom: @border;
+
+  &::before {
+    content: '!';
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3em;
+    padding: 1em 0;
+
+    text-align: center;
+
+    border-right: @border;
+  }
+}
+
+.messagelist >li:last-child {
+  border-bottom: 0;
+}
+
+@media @smaller {
+
+  .messagelist {
+    width: 80%;
+    margin-left: -40%;
+  }
+
+}
+
+@keyframes fadeOutSlow {
+  0% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+
+// ### CLEARFIX ###
+
+.cf {
+
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+
+  zoom: 1;
+
+}
+
+
+// ### WEBKIT SCROLLBARS ###
+
+::-webkit-scrollbar {
+  width: 0.6em;
+  height: 0.6em;
+
+  background: @bg;
+}
+ 
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: @scrollbar-color;
+}
+
+::-webkit-scrollbar-thumb:hover {
+
+}
+
+::-webkit-scrollbar-thumb:vertical {
+
+}
+
+::-webkit-scrollbar-thumb:vertical:hover {
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+
+}
+
+::-webkit-scrollbar-thumb:horizontal:hover {
+
+}
+
+::-webkit-scrollbar-button {
+  height: 0.6em;
+  width: 0.6em;
+
+  background: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background: @bg;
+}
+
+
+
+@media @smaller {
+
+
+
+
+}

@@ -1,0 +1,565 @@
+/*
+   This stylesheet was written in and compiled with LESS
+   See http://lesscss.org for further reference
+*/
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: 'liga', 'dlig', 'kern';
+  -moz-font-feature-settings: 'liga', 'dlig', 'kern';
+  font-feature-settings: 'liga', 'dlig', 'kern';
+  text-size-adjust: 100%;
+}
+html,
+body {
+  margin: 0;
+  background: #d7d4cd;
+}
+body {
+  position: relative;
+  font-family: 'Source Code Pro', Arial, sans-serif;
+  font-size: 120%;
+  font-weight: 300;
+  line-height: 1.4;
+  color: #000000;
+}
+title {
+  width: 48em;
+  font-family: 'only screen and ( max-width: 48em )';
+}
+a {
+  color: #000000;
+  text-decoration: none;
+}
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  outline: 0;
+}
+::-moz-selection {
+  background: #000000;
+  color: #d7d4cd;
+}
+::selection {
+  background: #000000;
+  color: #d7d4cd;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: 1;
+}
+h1 {
+  float: left;
+  margin: 1em;
+}
+.shell {
+  width: 98%;
+  max-width: 56em;
+  margin: 0 auto;
+  padding: 6em 0 3em;
+}
+.head {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 13;
+  background: #d7d4cd;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+nav {
+  float: right;
+}
+nav > a {
+  float: right;
+  padding: 1em;
+  line-height: 1;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+nav > a:hover,
+nav > a:active,
+nav > a:focus {
+  background: rgba(0, 0, 0, 0.15);
+}
+nav > a.login {
+  display: none;
+}
+@media only screen and ( max-width: 48em ) {
+  nav > a.login {
+    display: block;
+  }
+}
+p {
+  margin: 0 0 0em 0;
+}
+.imagelist {
+  margin: 0 3em;
+  padding: 0;
+  list-style-type: none;
+}
+.imagelist > li {
+  position: relative;
+  clear: left;
+  margin: 0 0 12em 0;
+  padding: 0;
+}
+.imagelist > li > a {
+  position: relative;
+  display: block;
+  margin: 0 -3em;
+  padding: 0 3em;
+}
+.imagelist > li img {
+  display: block;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+.imagelist > li > p {
+  float: left;
+  width: 100%;
+  margin: 1em 0 0 0;
+}
+.metalist {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.metalist > li {
+  margin: 0;
+  padding: 0;
+}
+.health {
+  position: absolute;
+  right: -3em;
+  top: 0;
+  bottom: 1px;
+  margin: 0 -3px 0 0 !important;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-left: 0;
+  -webkit-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transition: all 250ms ease;
+  transition: all 250ms ease;
+}
+li:hover .health {
+  -webkit-transform: scaleX(1);
+  -ms-transform: scaleX(1);
+  transform: scaleX(1);
+}
+.health > .chart {
+  position: relative;
+  display: block;
+  width: 3em;
+  height: 100%;
+  text-align: center;
+}
+.health > .chart::after {
+  content: ' ';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 50%;
+  background: rgba(0, 0, 0, 0.15);
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+.health > .chart > .number {
+  position: absolute;
+  left: 0;
+  bottom: 1em;
+  display: block;
+  width: 100%;
+  height: 1em;
+}
+.tools {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0 0 0 -3em;
+  -webkit-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: 100% 0;
+  -ms-transform-origin: 100% 0;
+  transform-origin: 100% 0;
+  -webkit-transition: all 250ms ease;
+  transition: all 250ms ease;
+}
+li:hover .tools {
+  -webkit-transform: scaleX(1);
+  -ms-transform: scaleX(1);
+  transform: scaleX(1);
+}
+.tools > a {
+  display: block;
+  width: 3em;
+  height: 1em;
+  padding: 1em 0;
+  line-height: 1;
+  text-align: center;
+  text-indent: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-right: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.tools > a:hover,
+.tools > a:active,
+.tools > a:focus {
+  background: rgba(0, 0, 0, 0.15);
+}
+.tools > a::before {
+  content: ' ';
+  float: left;
+  width: 100%;
+  height: 0.5em;
+  font-size: 150%;
+  line-height: 0.75em;
+  text-align: center;
+  text-indent: 0;
+}
+.tools .delete::before {
+  content: '\00D7';
+}
+.pagination {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  width: 100%;
+  height: 3em;
+  line-height: 1;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+/*
+.loggedin .pagination {
+  bottom: 3em;
+  margin-bottom: 6px;
+}
+*/
+.pagination > a {
+  display: block;
+  padding: 1em;
+  cursor: pointer;
+}
+.pagination > a:hover,
+.pagination > a:active,
+.pagination > a:focus {
+  background: rgba(0, 0, 0, 0.15);
+}
+.pagination > .newer {
+  float: left;
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+.pagination > .older {
+  float: right;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+}
+.pagination > .current {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: block;
+  width: 4em;
+  margin: 0 auto;
+  padding: 1em;
+  color: rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+form {
+  float: left;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+}
+input,
+textarea {
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 1em;
+  font-family: 'Source Code Pro', Arial, sans-serif;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: 1;
+  color: #000000;
+  background: none;
+  border: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+input::placeholder,
+textarea::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+input {
+  height: 3em;
+  padding: 0 1em;
+  line-height: 3em;
+}
+input[type='submit'],
+input[type='reset'],
+input[type='button'],
+button,
+.button {
+  cursor: pointer;
+}
+input[type='submit']:hover,
+input[type='reset']:hover,
+input[type='button']:hover,
+button:hover,
+.button:hover,
+input[type='submit']:active,
+input[type='reset']:active,
+input[type='button']:active,
+button:active,
+.button:active,
+input[type='submit']:focus,
+input[type='reset']:focus,
+input[type='button']:focus,
+button:focus,
+.button:focus {
+  background: rgba(0, 0, 0, 0.15);
+}
+.loginform {
+  float: right;
+}
+.loginform input:last-child {
+  border-right: 0;
+}
+@media only screen and ( max-width: 48em ) {
+  .loginform {
+    position: absolute;
+    top: -14em;
+    left: 0;
+    right: 0;
+    clear: both;
+    float: none;
+    margin-top: 1px;
+    background: #d7d4cd;
+    trabnsition: all 250ms ease;
+  }
+  .loginform:target {
+    top: 3em;
+  }
+  .loginform > input {
+    float: none;
+    width: 100%;
+    margin: 0;
+    text-align: left;
+    border-right: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  }
+  .loginform > input[type='submit'] {
+    text-align: center;
+  }
+}
+.uploadform {
+  position: fixed;
+  left: 0;
+  bottom: -4em;
+  right: 0;
+  z-index: 17;
+  margin: 0;
+  background: #d7d4cd;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-transition: all 250ms ease;
+  transition: all 250ms ease;
+}
+.uploadform:target {
+  bottom: 0;
+}
+.uploadform > .close {
+  float: right;
+  width: 3em;
+  padding: 1em 0;
+  line-height: 1;
+  text-align: center;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.uploadform > .close:hover,
+.uploadform > .close:active,
+.uploadform > .close:focus {
+  background: rgba(0, 0, 0, 0.15);
+}
+.uploadform > .close::before {
+  content: '\00D7';
+  float: left;
+  width: 100%;
+  height: 0.5em;
+  font-size: 150%;
+  line-height: 0.75em;
+  text-align: center;
+  text-indent: 0;
+}
+.uploadform > h3 {
+  float: left;
+  padding: 1em;
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+.uploadform > .file {
+  position: relative;
+  float: left;
+  padding: 1em;
+  line-height: 1;
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+.uploadform > .file > input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.uploadform > .file.empty {
+  left: 0;
+  opacity: 1;
+}
+.uploadform > input[type='submit'] {
+  float: right;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+}
+@media only screen and ( max-width: 48em ) {
+  .uploadform {
+    float: none;
+    bottom: -14em;
+  }
+  .uploadform > h3,
+  .uploadform > input,
+  .uploadform > .file {
+    display: block;
+    width: 100%;
+    float: none !important;
+    text-align: left;
+    border-right: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  }
+  .uploadform > h3:last-child,
+  .uploadform > input:last-child,
+  .uploadform > .file:last-child {
+    border-bottom: 0;
+  }
+}
+.messagelist {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  z-index: 15;
+  display: block;
+  width: 40%;
+  margin: 0 0 0 -20%;
+  padding: 0;
+  list-style-type: none;
+  background: #d7d4cd;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-animation: fadeOutSlow 4s;
+  animation: fadeOutSlow 4s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+.messagelist > li {
+  position: relative;
+  padding: 1em;
+  padding-left: 4em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+.messagelist > li::before {
+  content: '!';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3em;
+  padding: 1em 0;
+  text-align: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+.messagelist > li:last-child {
+  border-bottom: 0;
+}
+@media only screen and ( max-width: 48em ) {
+  .messagelist {
+    width: 80%;
+    margin-left: -40%;
+  }
+}
+@-webkit-keyframes fadeOutSlow {
+  0% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fadeOutSlow {
+  0% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.cf {
+  zoom: 1;
+}
+.cf:before,
+.cf:after {
+  content: " ";
+  display: table;
+}
+.cf:after {
+  clear: both;
+}
+::-webkit-scrollbar {
+  width: 0.6em;
+  height: 0.6em;
+  background: #d7d4cd;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+}
+::-webkit-scrollbar-button {
+  height: 0.6em;
+  width: 0.6em;
+  background: transparent;
+}
+::-webkit-scrollbar-corner {
+  background: #d7d4cd;
+}
