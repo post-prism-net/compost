@@ -1,7 +1,7 @@
 <?php
-$time = compost::getMetaItem( $id, 'time' );
-$views = compost::getMetaItem( $id, 'views' );
-$halflife = compost::getMetaItem( $id, 'halflife' );
+$time = compost::getMetaValue( $id, 'time' );
+$views = compost::getMetaValue( $id, 'views' );
+$halflife = compost::getMetaValue( $id, 'halflife' );
 
 $health = ( $views > $halflife ) ? 0 : 100 - floor( $views / $halflife * 100 );
 
@@ -19,7 +19,7 @@ $health = ( $views > $halflife ) ? 0 : 100 - floor( $views / $halflife * 100 );
 	<?php } ?>
 
 
-	<p><?php echo compost::getMetaItem( $id, 'description' ) ?></p>
+	<p><?php echo compost::getMetaValue( $id, 'description' ) ?></p>
 	<ul class="metalist">
 		<!--
 		<li class="time">

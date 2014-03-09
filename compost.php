@@ -19,6 +19,7 @@ class compost {
 
 	/*
 	 * Init 
+	 *
 	 */
 	static function init() {
 		global $messages;
@@ -31,6 +32,10 @@ class compost {
 		self::selectView();
 	}
 
+	/** 
+	 * View controller
+	 *
+	 */
 	static function selectView() {
 
 		// login
@@ -107,6 +112,20 @@ class compost {
 	}
 
 	/** 
+	  * Get meta value by image ID and meta key
+	  *
+	  * @param 	int 	$id image ID
+	  * @param 	string 	$key meta key
+	  * @param 		 	$value meta value
+	  */
+	static function getMetaValue( $id, $key ) {
+
+		$meta = self::getMeta( $id );
+
+		return $meta[ $key ];
+	}
+
+	/** 
 	  * Save image meta 
 	  *
 	  * @param 	int 	$id image ID
@@ -119,13 +138,13 @@ class compost {
 	}
 
 	/** 
-	  * change a specific meta key/value pair
+	  * Save a specific meta value by key
 	  *
 	  * @param 	int 	$id image ID
 	  * @param 	string 	$key meta key
 	  * @param 		 	$value meta value
 	  */
-	static function setMetaItem( $id, $key, $value ) {
+	static function setMetaValue( $id, $key, $value ) {
 
 		$meta = self::getMeta( $id );
 		$meta[ $key ] = $value;
@@ -133,14 +152,10 @@ class compost {
 		self::setMeta( $id, $meta );
 	}
 
-
-	static function getMetaItem( $id, $key ) {
-
-		$meta = self::getMeta( $id );
-
-		return $meta[ $key ];
-	}
-
+	/** 
+	  * Upload routine called by view controller
+	  *
+	  */
 	static function upload() {
 		global $messages;
 
@@ -157,7 +172,6 @@ class compost {
 		if( self::createImage( $id ) ) {
 
 			self::setMeta( $id, $meta );
-
 			self::redirectBack();
 
 			$messages[] = 'photo added.';
@@ -237,6 +251,10 @@ class compost {
 
 	}
 
+	/** 
+	  * Delete image routine called by view controller
+	  *
+	  */
 	static function deleteImage( $id ) {
 		global $messages;
 
@@ -299,7 +317,7 @@ class compost {
 
 				// increse view counter
 				$views = $meta['views'] + 1;
-				self::setMetaItem( $id, 'views', $views );
+				self::setMetaValue( $id, 'views', $views );
 
 		    }
 
