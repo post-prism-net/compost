@@ -10,7 +10,7 @@
 		1. choose file.
 		<input type="file" name="file">
 	</span>
-	<input type="hidden" name="max_file_size" value="5242880">
+	<input type="hidden" name="max_file_size" value="20971520">
 	<input type="text" name="description" placeholder="2. write caption.">
 	<input type="hidden" name="action" value="upload">
 	<input type="submit" name="upload" value="3. upload."> 

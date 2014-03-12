@@ -11,7 +11,7 @@ c::set( 'path_templates', 'templates/' );
 
 // image settings
 c::set( 'image_width', 800 );
-c::set( 'quality_maximum', 90 );
+c::set( 'quality_maximum', 95 );
 c::set( 'quality_minimum', 1 );
 c::set( 'scale_maximum', 1 );
 c::set( 'scale_minimum', 0.75 );

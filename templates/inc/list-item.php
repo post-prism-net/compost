@@ -8,9 +8,13 @@ $health = ( $views > $halflife ) ? 0 : 100 - floor( $views / $halflife * 100 );
 ?>
 
 <li data-id="<?php echo $id; ?>">
+	<?php if( compost::is_list() ) { ?>
 	<a href="<?php echo compost::getbaseUrl(); ?>?id=<?php echo $id; ?>" class="permalink">
+	<?php } ?>
 		<img src="<?php echo compost::getbaseUrl(); ?>?stream=<?php echo $id; ?>">		
+	<?php if( compost::is_list() ) { ?>
 	</a>
+	<?php } ?>
 
 	<?php if( compost::is_loggedin() ) { ?>
 	<div class="tools">

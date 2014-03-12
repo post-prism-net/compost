@@ -85,6 +85,8 @@ class compost {
 
 		$ids = dir::read( c::get( 'path_meta' ) );
 
+
+
 		// sort by time DESC
 		arsort( $ids ); 
 
@@ -181,6 +183,7 @@ class compost {
 	}
 
 	static function createImage( $id ) {
+		global $messages;
 
 		// http://php.net/manual/de/features.file-upload.php
 		try {
@@ -206,8 +209,9 @@ class compost {
 		    }
 
 		    // You should also check filesize here.
-		    if( $_FILES['file']['size'] > 5242880 ) {
+		    if( $_FILES['file']['size'] > 20971520 ) {
 		        throw new RuntimeException( 'Exceeded filesize limit.' );
+		        $messages[] = 'File size too big.';
 		    }
 
 		    // DO NOT TRUST $_FILES['upfile']['mime'] VALUE !!
@@ -405,13 +409,38 @@ class compost {
 
 
 	static function templateList() {
+		global $view;
+		$view = 'list';
+
 		include( c::get( 'path_templates' ) . 'list.php' );
 	}
 
 	static function templateItem( $id ) {
+		global $view;
+		$view = 'item';
+
 		include( c::get( 'path_templates' ) . 'item.php' );
 	}
 
+	static function is_list() {
+		global $view;
+
+		if( $view == 'list') {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	static function is_item() {
+		global $view;
+
+		if( $view == 'item') {
+			return true;
+		} else {
+			return false;
+		}		
+	}
 
 	/**
 	  * Render list of images 
@@ -420,6 +449,7 @@ class compost {
 	  *	@param 	int 	@offset number of images to skip
 	  */
 	static function renderList( $page = 0 ) {
+		global $view;
 
 		$page = ( get( 'page' ) ) ? intval( get( 'page' ) ) : $page;
 		$offset = $page * c::get( 'render_limit' );
@@ -544,7 +574,7 @@ class compost {
 
 		} else {
 
-			$messages[] = 'login failed. wrong user name / password?';
+			$messages[] = 'login failed. wrong user / password?';
 
 		}
 

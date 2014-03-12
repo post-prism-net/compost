@@ -31,6 +31,10 @@
 @smaller: ~'only screen and ( max-width: @{smaller-em} )';
 
 
+// ### IMPORTS ###
+
+@import url( http://fonts.googleapis.com/css?family=Source+Code+Pro:400,300,500,600 );
+
 // ### MIXINS ###
 
 
@@ -60,6 +64,12 @@ body {
   line-height: @line-height;
   
   color: @text;
+}
+
+@media @smaller {
+  body {
+    font-size: 90%;
+  }
 }
 
 // sync breakpoints between CSS and JS
@@ -127,6 +137,8 @@ h1 {
   float: left;
   margin: 1em;
 
+  white-space: nowrap;
+  overflow: hidden;
 
   & a {
 
@@ -211,7 +223,7 @@ h5 {
 
 .shell {
   // position: relative;
-  width: 98%;
+  width: 96%;
   max-width: 56em;
   margin: 0 auto;
   padding: 6em 0 3em;
@@ -291,28 +303,33 @@ p + p {
 
 // imagelist 
 .imagelist {
-  margin: 0 3em;
-  padding: 0;
+  margin: 0;
+  padding: 10% 0 0 0;
   list-style-type: none;
+}
+
+.item .imagelist {
+  padding-top: 0;
 }
 
 .imagelist > li { 
   position: relative;
   clear: left;
-  margin: 0 0 12em 0;
+  margin: 0 0 50%;
   padding: 0;
 }
 
 .imagelist > li > a { 
   position: relative;
   display: block;
-  margin: 0 -3em;
-  padding: 0 3em;
+  margin: 0;
+  padding: 0;
 }
 
 .imagelist > li img {
   display: block;
   width: 100%;
+  margin: 0;
 
   border: @border;
 }
@@ -357,22 +374,22 @@ p + p {
 
 .health {
   position: absolute;
-  right: -3em;
+  right: -1px;
   top: 0;
   bottom: 1px;
 
-  margin: 0 -3px 0 0 !important;
+  margin: 0;
 
-  border: @border;
-  border-left: 0;
+  opacity: 0;
 
-  transform: scaleX( 0 );
-  transform-origin: 0 0;
+  // transform: scaleX( 0 );
+  // transform-origin: 0 0;
   transition: all @transition-duration ease;
 }
 
 li:hover .health {
-  transform: scaleX( 1 );
+  opacity: 1;
+  // transform: scaleX( 1 );
 }
 
 .health > .chart {
@@ -380,8 +397,12 @@ li:hover .health {
   display: block;
   width: 3em;
   height: 100%;
+  margin: 0;
 
   text-align: center;
+
+  border-left: @border;
+  background: fade( @bg, ( @opacity * 100 ) );
 
   &::after {
     content: ' ';
@@ -393,7 +414,7 @@ li:hover .health {
     width: 100%;
     height: 50%;
 
-    background: rgba( 0,0,0, @opacity );
+    background: @bg;
     border-top: @border;
   }
 }
@@ -402,6 +423,7 @@ li:hover .health {
   position: absolute;
   left: 0;
   bottom: 1em;
+  z-index: 3;
   display: block;
   width: 100%;
   height: 1em;
@@ -416,16 +438,18 @@ li:hover .health {
   left: 0;
   top: 0;
 
-  margin: 0 0 0 -3em;
+  margin: 0;
 
-  transform: scaleX( 0 );
-  transform-origin: 100% 0;
+  opacity: 0;
+  // transform: scaleX( 0 );
+  // transform-origin: 100% 0;
   transition: all @transition-duration ease;
 }
 
 
 li:hover .tools {
-  transform: scaleX( 1 );
+  // transform: scaleX( 1 );
+  opacity: 1;
 }
 
 .tools > a {
@@ -438,8 +462,8 @@ li:hover .tools {
   text-align: center;
   text-indent: 100%;
 
+  background: @bg;
   border: @border;
-  border-right: 0;
 
   white-space: nowrap;
   overflow: hidden;
@@ -447,7 +471,7 @@ li:hover .tools {
   &:hover,
   &:active,
   &:focus {
-    background: rgba( 0,0,0, @opacity );
+    background: darken( @bg, ( @opacity * 100 ) );
   }
 
   &::before {
@@ -564,6 +588,7 @@ input[type='button'],
 button,
 .button {
   cursor: pointer;
+  white-space: nowrap;
 
   &:hover,
   &:active,

@@ -1678,7 +1678,7 @@ class dir {
    */
   static function read($dir) {
     if(!is_dir($dir)) return false;
-    $skip = array('.', '..', '.DS_Store');
+    $skip = array('.', '..', '.DS_Store', '.htaccess');
     return array_diff(scandir($dir),$skip);
   }
 

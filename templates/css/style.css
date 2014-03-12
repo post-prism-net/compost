@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:400,300,500,600 );
 /*
    This stylesheet was written in and compiled with LESS
    See http://lesscss.org for further reference
@@ -21,6 +22,11 @@ body {
   font-weight: 300;
   line-height: 1.4;
   color: #000000;
+}
+@media only screen and ( max-width: 48em ) {
+  body {
+    font-size: 90%;
+  }
 }
 title {
   width: 48em;
@@ -57,9 +63,11 @@ h5 {
 h1 {
   float: left;
   margin: 1em;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .shell {
-  width: 98%;
+  width: 96%;
   max-width: 56em;
   margin: 0 auto;
   padding: 6em 0 3em;
@@ -82,6 +90,7 @@ nav > a {
   line-height: 1;
   border-left: 1px solid rgba(0, 0, 0, 0.15);
   cursor: pointer;
+  white-space: nowrap;
 }
 nav > a:hover,
 nav > a:active,
@@ -100,25 +109,29 @@ p {
   margin: 0 0 0em 0;
 }
 .imagelist {
-  margin: 0 3em;
-  padding: 0;
+  margin: 0;
+  padding: 10% 0 0 0;
   list-style-type: none;
+}
+.item .imagelist {
+  padding-top: 0;
 }
 .imagelist > li {
   position: relative;
   clear: left;
-  margin: 0 0 12em 0;
+  margin: 0 0 50%;
   padding: 0;
 }
 .imagelist > li > a {
   position: relative;
   display: block;
-  margin: 0 -3em;
-  padding: 0 3em;
+  margin: 0;
+  padding: 0;
 }
 .imagelist > li img {
   display: block;
   width: 100%;
+  margin: 0;
   border: 1px solid rgba(0, 0, 0, 0.15);
 }
 .imagelist > li > p {
@@ -137,32 +150,26 @@ p {
 }
 .health {
   position: absolute;
-  right: -3em;
+  right: -1px;
   top: 0;
   bottom: 1px;
-  margin: 0 -3px 0 0 !important;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-left: 0;
-  -webkit-transform: scaleX(0);
-  -ms-transform: scaleX(0);
-  transform: scaleX(0);
-  -webkit-transform-origin: 0 0;
-  -ms-transform-origin: 0 0;
-  transform-origin: 0 0;
+  margin: 0;
+  opacity: 0;
   -webkit-transition: all 250ms ease;
   transition: all 250ms ease;
 }
 li:hover .health {
-  -webkit-transform: scaleX(1);
-  -ms-transform: scaleX(1);
-  transform: scaleX(1);
+  opacity: 1;
 }
 .health > .chart {
   position: relative;
   display: block;
   width: 3em;
   height: 100%;
+  margin: 0;
   text-align: center;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  background: rgba(215, 212, 205, 0.15);
 }
 .health > .chart::after {
   content: ' ';
@@ -172,13 +179,14 @@ li:hover .health {
   display: block;
   width: 100%;
   height: 50%;
-  background: rgba(0, 0, 0, 0.15);
+  background: #d7d4cd;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
 .health > .chart > .number {
   position: absolute;
   left: 0;
   bottom: 1em;
+  z-index: 3;
   display: block;
   width: 100%;
   height: 1em;
@@ -187,20 +195,13 @@ li:hover .health {
   position: absolute;
   left: 0;
   top: 0;
-  margin: 0 0 0 -3em;
-  -webkit-transform: scaleX(0);
-  -ms-transform: scaleX(0);
-  transform: scaleX(0);
-  -webkit-transform-origin: 100% 0;
-  -ms-transform-origin: 100% 0;
-  transform-origin: 100% 0;
+  margin: 0;
+  opacity: 0;
   -webkit-transition: all 250ms ease;
   transition: all 250ms ease;
 }
 li:hover .tools {
-  -webkit-transform: scaleX(1);
-  -ms-transform: scaleX(1);
-  transform: scaleX(1);
+  opacity: 1;
 }
 .tools > a {
   display: block;
@@ -210,15 +211,15 @@ li:hover .tools {
   line-height: 1;
   text-align: center;
   text-indent: 100%;
+  background: #d7d4cd;
   border: 1px solid rgba(0, 0, 0, 0.15);
-  border-right: 0;
   white-space: nowrap;
   overflow: hidden;
 }
 .tools > a:hover,
 .tools > a:active,
 .tools > a:focus {
-  background: rgba(0, 0, 0, 0.15);
+  background: #b5afa3;
 }
 .tools > a::before {
   content: ' ';
@@ -253,6 +254,7 @@ li:hover .tools {
   display: block;
   padding: 1em;
   cursor: pointer;
+  white-space: nowrap;
 }
 .pagination > a:hover,
 .pagination > a:active,
@@ -324,6 +326,7 @@ input[type='button'],
 button,
 .button {
   cursor: pointer;
+  white-space: nowrap;
 }
 input[type='submit']:hover,
 input[type='reset']:hover,
