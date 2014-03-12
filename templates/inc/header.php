@@ -1,6 +1,6 @@
 <?php s::start(); ?>
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 <head>
 	<title>compost:<?php echo c::get( 'user_display_name' ); ?></title>
 	<meta charset="utf-8">
@@ -10,6 +10,8 @@
     <meta http-equiv="cleartype" content="on" /> 
 
 	<link rel="stylesheet" type="text/css" href="templates/css/style.css" />
+
+	<script type="text/javascript" src="templates/js/all.js"></script>
 </head>
 <?php 
 $classes = '';

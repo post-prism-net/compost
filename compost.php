@@ -549,6 +549,13 @@ class compost {
 		}
 	}
 
+
+	static function getImageUrl( $id ) {
+		$url = self::getbaseUrl() . '?stream=' . $id;
+
+		return $url;	
+	}
+
 	static function getBaseUrl() {
 
 	  $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? 'https://' : 'http://';

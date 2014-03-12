@@ -11,19 +11,18 @@ $health = ( $views > $halflife ) ? 0 : 100 - floor( $views / $halflife * 100 );
 	<?php if( compost::is_list() ) { ?>
 	<a href="<?php echo compost::getbaseUrl(); ?>?id=<?php echo $id; ?>" class="permalink">
 	<?php } ?>
-		<img src="<?php echo compost::getbaseUrl(); ?>?stream=<?php echo $id; ?>">		
+		<img src="<?php echo compost::getImageUrl( $id ); ?>">		
 	<?php if( compost::is_list() ) { ?>
 	</a>
 	<?php } ?>
 
-	<?php if( compost::is_loggedin() ) { ?>
 	<div class="tools">
-		<a href="<?php echo compost::getbaseUrl(); ?>?delete=<?php echo $id; ?>" class="delete">delete</a>
+		<?php if( compost::is_loggedin() ) { ?>
+		<a href="<?php echo compost::getbaseUrl(); ?>?delete=<?php echo $id; ?>" class="delete" title="delete">delete</a>
+		<?php } ?>
+		<a href="<?php echo compost::getImageUrl( $id ); ?>" class="share" title="share">share</a>
 	</div>
-	<?php } ?>
 
-
-	<p><?php echo compost::getMetaValue( $id, 'description' ) ?></p>
 	<ul class="metalist">
 		<!--
 		<li class="time">
@@ -32,8 +31,9 @@ $health = ( $views > $halflife ) ? 0 : 100 - floor( $views / $halflife * 100 );
 			<span class="day"><?php echo date( 'y', $time ); ?></span>
 		</li>
 	-->
-		<li class="health"><span class="chart" data-health="<?php echo $health; ?>%"><span class="number"><?php echo $health; ?>%</span></span></li>
+		<li class="health"><span class="chart" data-health="<?php echo $health; ?>%"><span class="bar"></span><span class="number"><?php echo $health; ?>%</span></span></li>
 	</ul>
 
+	<p><?php echo compost::getMetaValue( $id, 'description' ) ?></p>
 
 </li>
