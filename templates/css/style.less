@@ -790,23 +790,27 @@ button,
   z-index: 15;
 
   display: block;
-  width: 40%;
-  margin: 0 0 0 -20%;
+  width: 50%;
+  margin: 0 0 0 -25%;
   padding: 0;
   list-style-type: none;
 
-  background: @bg;
-  border: @border;
-
-  animation: fadeOutSlow 4s;
-  animation-fill-mode: forwards;
+  // animation: fadeOutSlow 4s;
+  // animation-fill-mode: forwards;
 }
 
 .messagelist > li { 
   position: relative;
-  padding: 1em;
-  padding-left: 4em;
-  border-bottom: @border;
+  top: 0;
+  margin: 0 0 1em 0;
+  padding: 1em 4em;
+
+  background: @bg;
+  border: @border;
+
+  opacity: 1;
+
+  transition: all 250ms ease;
 
   &::before {
     content: '!';
@@ -824,8 +828,47 @@ button,
   }
 }
 
-.messagelist >li:last-child {
-  border-bottom: 0;
+.messagelist > li.hidden {
+  opacity: 0;
+  top: -2em;
+}
+
+.messagelist > li .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 3em;
+  padding: 1em 0;
+
+  line-height: 1;
+  text-align: center;
+  text-indent: 100%;
+
+  border-left: @border;
+
+  white-space: nowrap;
+  overflow: hidden;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: rgba( 0,0,0, @opacity );
+  }
+
+  &::before {
+    content: '\00D7';
+    float: left;
+    width: 100%;
+    height: 0.5em;
+
+    font-size: 150%;
+    line-height: 0.75em;
+    text-align: center;
+    text-indent: 0;
+
+  }
+
 }
 
 @media @smaller {

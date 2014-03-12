@@ -622,6 +622,7 @@ class compost {
 			foreach( $messages as $message ) {
 				echo '<li>';
 				echo $message;
+				echo '<a href="#" class="close">close</a>';
 				echo '</li>';
 			}
 			echo '</ul>';

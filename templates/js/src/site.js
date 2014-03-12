@@ -27,6 +27,7 @@ jQuery( function( $ ) {
             debuglog( 'site.init()' );
             bindEventHandlers();
             win.init();
+            tools.init();
             meta.init();
             modal.init();
         }
@@ -82,6 +83,38 @@ jQuery( function( $ ) {
 
         } )();
 
+
+        // module tools
+        var tools = ( function() {
+
+            var init = function() {
+                debuglog( 'site.tools.init()' );
+                bindEventHandlers();
+            }
+
+            var bindEventHandlers = function() {
+
+                $( document ).on( 'click', '.tools .share', function( e ) {
+
+                    var url = $( this )
+                        .closest( 'li')
+                        .find( 'img' )
+                        .first()
+                        .attr( 'src' );
+
+                    e.preventDefault();
+                    modal.nu( 'share link: <br>' + url );
+
+                } )
+
+            }
+
+            return {
+                init: function() { init(); }
+            }
+
+        } )();
+
         // module meta
         var meta = ( function() {
 
@@ -129,25 +162,121 @@ jQuery( function( $ ) {
         // module modal 
         var modal = ( function() {
 
+            var modalEl;
+
             var init = function() {
                 debuglog( 'site.modal.init()' );
+                modalEl = $( '.messagelist' );
                 bindEventHandlers();
             }
 
             var bindEventHandlers = function() {
 
+                $( document ).on( 'click', '.messagelist li .close',  function( e ) {
+                    e.preventDefault();
+
+                    var item = $( this ).closest( 'li' );
+                    hideItem( item );
+
+                    setTimeout( function() {
+                        removeItem( item );
+                    }, 1000 );
+
+                } );
+
+            }
+
+            var buildList = function() {
+                debuglog( 'site.modal.buildList()' );
+
+                modalEl = $( '<ul class="messagelist"></ul>' );
+                modalEl.appendTo( $( 'body' ) );
+
+            }
+
+            var removeList = function() {
+                debuglog( 'site.modal.removeList()' );
+
+                modalEl.remove();
+            }
+
+            var addItem = function( message, clss ) {
+                debuglog( 'site.modal.addItem( ' + message + ' )' );
+
+                if( !clss ) var clss = '';
+
+                var item = $( '<li class="hidden ' + clss + '"><a href="#" class="close">close</a></li>' );
+                item
+                    .append( message )
+                    .appendTo( modalEl );
+
+                return item;
+
+            }
+
+            var removeItem = function( item ) {
+                debuglog( 'site.modal.removeItem()' );
+
+                item.remove();
+            } 
+
+            var showItem = function( item ) {
+                debuglog( 'site.modal.showItem()' );
+
+                setTimeout( function() {
+                    item.removeClass( 'hidden' );
+                }, 1 );
+            }
+
+            var hideItem = function( item ) {
+                debuglog( 'site.modal.hideItem()' );
+
+                setTimeout( function() {
+                    item.addClass( 'hidden' );
+                }, 1 );
+            }
+
+            var nu = function( message, clss ) {
+
+                if( modalEl.length < 1  ) {
+                    buildList();
+                }
+
+                var item = addItem( message, clss );
+                showItem( item );
+                               
+            }
+
+            var unitTest = function() {
+                debuglog( 'site.modal.unitTest()' );
+
+
+
+                item = addItem( 'First message' );
+                showItem( item );
+
+                setTimeout( function() {
+
+                    item = addItem( 'Second message' );
+                    showItem( item );
+
+                }, 2000 );
 
             }
 
             return {
-                init: function() { init(); }
+                init: function() { init(); },
+                buildList: function() { buildList(); },
+                removeList: function() { removeList(); },
+                addItem: function( item, clss ) { addItem( item, clss ); },
+                removeItem: function( item ) { removeItem( item ); },
+                showItem: function( item ) { showItem( item ); },
+                hideItem: function( item ) { hideItem( item ); },
+                nu: function( message, clss ) { nu( message, clss ); },
+                unitTest: function() { unitTest(); }
             }
 
         } )();
-
-        return {
-            init: function() { init(); }
-        }
 
 
         // module 
@@ -173,7 +302,8 @@ jQuery( function( $ ) {
             init: function() { init(); }
         }
 
-    } )();
+    } )(); // end of site
+
 
     // document ready
     $( document ).ready( function () {
