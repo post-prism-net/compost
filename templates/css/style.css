@@ -1,8 +1,13 @@
-@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:400,300,500,600 );
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:200,300,400,500,600 );
 /*
    This stylesheet was written in and compiled with LESS
    See http://lesscss.org for further reference
 */
+/**
+  * Global styles
+  *
+  *
+  */
 html {
   text-rendering: optimizeLegibility;
   -webkit-font-feature-settings: 'liga', 'dlig', 'kern';
@@ -120,7 +125,7 @@ p {
 .imagelist > li {
   position: relative;
   clear: left;
-  margin: 0 0 50%;
+  margin: 0 0 25%;
   padding: 0;
 }
 .item .imagelist > li {

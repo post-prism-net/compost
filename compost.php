@@ -11,8 +11,10 @@
 
 include( 'kirby.php' );
 
+// session start
 s::start();
 
+// start app
 compost::init();
 
 class compost {
@@ -84,8 +86,6 @@ class compost {
 	static function getIds() {
 
 		$ids = dir::read( c::get( 'path_meta' ) );
-
-
 
 		// sort by time DESC
 		arsort( $ids ); 
@@ -182,10 +182,16 @@ class compost {
 
 	}
 
+	/** 
+	  * Upload image file 
+	  * > http://php.net/manual/de/features.file-upload.php
+	  *
+	  * @param 	int 	$id image ID
+	  */
 	static function createImage( $id ) {
 		global $messages;
 
-		// http://php.net/manual/de/features.file-upload.php
+		
 		try {
 		   
 		    // Undefined | Multiple Files | $_FILES Corruption Attack
@@ -234,7 +240,7 @@ class compost {
 		    // On this example, obtain safe unique name from its binary data.
 		    if( !move_uploaded_file(
 		        $_FILES['file']['tmp_name'],
-		        sprintf('%s/%s.%s',
+		        sprintf( '%s/%s.%s',
 		        	c::get( 'path_images' ),
 		            $id,
 		            $ext
@@ -256,8 +262,9 @@ class compost {
 	}
 
 	/** 
-	  * Delete image routine called by view controller
-	  *
+	  * Delete image routine called by view controller 
+	  * 
+	  * @param 	int 	$id image ID
 	  */
 	static function deleteImage( $id ) {
 		global $messages;
@@ -280,6 +287,12 @@ class compost {
 
 	}
 
+	/** 
+	  * image manipulation routine
+	  * 
+	  * @param 	int 	$id image ID
+	  * @param 	array 	$meta meta data array
+	  */
 	static function processImage( $id, $meta ) {
 
 		// open image
@@ -329,7 +342,13 @@ class compost {
  
 	}
 
-
+	/** 
+	  * Qualculate JPEG quality based on views and image halflife 
+	  * 
+	  * @param 	int 	$halflife 
+	  * @param 	int 	$views
+	  * @return int 	0 > quality >= 100
+	  */
 	static function calculateQuality( $halflife, $views ) {
 
 		if( $views == 0 ) {
@@ -340,15 +359,6 @@ class compost {
 		if( $views > $halflife ) {
 			$factor = 1;
 		// destruction: 0%
-		/* example: 
-			views: 1 / halflife: 100 = 0.01 	= 99
-			views: 5 / halflife: 100 = 0.05 	= 95
-			views: 10 / halflife: 100 = 0.1 	= 90
-			views: 50 / halflife: 100 = 0.5 	= 50
-			views: 75 / halflife: 100 = 0.75 	= 75
-			views: 100 / halflife: 100 = 1   	= 0
-			views: 200 / halflife: 100 = 2   	= -1
-			*/
 		} else {
 			$factor = 1 - ( $views / $halflife );
 		}
@@ -361,6 +371,13 @@ class compost {
 		return $quality;
 	}
 
+	/** 
+	  * Qualculate image scale factor quality based on views and image halflife 
+	  * 
+	  * @param 	int 	$halflife 
+	  * @param 	int 	$views
+	  * @return int 	0 >= scale factor >= 1
+	  */
 	static function calculateScale( $halflife, $views ) {
 
 		if( $views == 0 ) {
@@ -380,6 +397,13 @@ class compost {
 		return $scale;
 	}
 
+	/** 
+	  * Qualculate image size based on current image size and scale factor
+	  * 
+	  * @param 	array 	$size 
+	  * @param 	int 	$scale factor
+	  * @return int 	image size
+	  */
 	static function calculateSize( $size, $scale ) {
 
 			$width = $size['width'];
@@ -407,7 +431,10 @@ class compost {
 		return $size;
 	}
 
-
+	/** 
+	  * Render list
+	  * 
+	  */
 	static function templateList() {
 		global $view;
 		$view = 'list';
@@ -415,31 +442,15 @@ class compost {
 		include( c::get( 'path_templates' ) . 'list.php' );
 	}
 
+	/** 
+	  * Render item
+	  * 
+	  */
 	static function templateItem( $id ) {
 		global $view;
 		$view = 'item';
 
 		include( c::get( 'path_templates' ) . 'item.php' );
-	}
-
-	static function is_list() {
-		global $view;
-
-		if( $view == 'list') {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	static function is_item() {
-		global $view;
-
-		if( $view == 'item') {
-			return true;
-		} else {
-			return false;
-		}		
 	}
 
 	/**
@@ -480,7 +491,10 @@ class compost {
 
 	}
 
-
+	/**
+	  * Render pagination 
+	  *
+	  */
 	static function renderPagination() {
 		$page = ( get( 'page' ) ) ? intval( get( 'page' ) ) : 0;
 		$offset = ( intval( get( 'offset' ) ) ) ? intval( get( 'offset' ) ) : 0; 
@@ -510,6 +524,10 @@ class compost {
 		}
 	}
 
+	/**
+	  * Render tools 
+	  *
+	  */
 	static function renderTools() {
 
 		if( self::is_loggedin() ) {
@@ -518,6 +536,81 @@ class compost {
 			include( 'templates/inc/loggedout.php' ); 
 		}
 
+	}
+
+	/**
+	  * Render messages
+	  * 
+	  */
+	static function renderMessages() {
+		global $messages;
+
+		if( $messages ) {
+			echo '<ul class="messagelist">';
+			foreach( $messages as $message ) {
+				echo '<li>';
+				echo $message;
+				echo '<a href="#" class="close">close</a>';
+				echo '</li>';
+			}
+			echo '</ul>';
+		}
+
+	}
+
+	/** 
+	  * Check if current view is list view
+	  * 
+	  * @return boolean 
+	  */
+	static function is_list() {
+		global $view;
+
+		if( $view == 'list') {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/** 
+	  * Check if current view is item view
+	  * 
+	  * @return boolean 
+	  */
+	static function is_item() {
+		global $view;
+
+		if( $view == 'item') {
+			return true;
+		} else {
+			return false;
+		}		
+	}
+
+	/**
+	  * Get image URL by ID
+	  *
+	  *	@param 	int 	@id image ID
+	  *	@return string 	image URL
+	  */
+	static function getImageUrl( $id ) {
+		$url = self::getbaseUrl() . '?stream=' . $id;
+
+		return $url;	
+	}
+
+	/**
+	  * Get the app's base URL
+	  *
+	  *	@return string 	app URL
+	  */
+	static function getBaseUrl() {
+	  $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? 'https://' : 'http://';
+	  $path = explode( '?', $_SERVER['REQUEST_URI'], 2 );
+	  $url = $protocol . $_SERVER['HTTP_HOST'] . $path[0];
+
+	  return $url;
 	}
 
 	/**
@@ -549,23 +642,10 @@ class compost {
 		}
 	}
 
-
-	static function getImageUrl( $id ) {
-		$url = self::getbaseUrl() . '?stream=' . $id;
-
-		return $url;	
-	}
-
-	static function getBaseUrl() {
-
-	  $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? 'https://' : 'http://';
-	  $path = explode( '?', $_SERVER['REQUEST_URI'], 2 );
-	  $url = $protocol . $_SERVER['HTTP_HOST'] . $path[0];
-
-	  return $url;
-	}
-
-
+	/**
+	  * Login routine
+	  * 
+	  */
 	static function login() {
 		global $messages;
 
@@ -574,30 +654,32 @@ class compost {
 
 			// set session var
 			s::set( 'user_loggedin', true );
-
 			session_write_close(); 
-
 			self::redirectBack();
 
 		} else {
-
 			$messages[] = 'login failed. wrong user / password?';
-
 		}
 
 	}
 
+	/**
+	  * Logout routine
+	  * 
+	  */
 	static function logout() {
 		global $messages;
 
 		$messages[] = 'you are logged out.';
-
 		s::remove( 'user_loggedin' );
-
 		self::redirectBack();
 	}
 
-
+	/**
+	  * Check if user is logged in
+	  * 
+	  * @return 	boolean
+	  */
 	static function is_loggedin() {
 
 		if( s::get( 'user_loggedin' ) ) {
@@ -608,30 +690,15 @@ class compost {
 
 	}
 
-
+	/**
+	  * Redirect user after form submit to enable F5 page reload
+	  * 
+	  */
 	static function redirectBack() {
 		header( 'Location: ' . $_SERVER['HTTP_REFERER'] );		
 	}
 
-
-	static function renderMessages() {
-		global $messages;
-
-		if( $messages ) {
-			echo '<ul class="messagelist">';
-			foreach( $messages as $message ) {
-				echo '<li>';
-				echo $message;
-				echo '<a href="#" class="close">close</a>';
-				echo '</li>';
-			}
-			echo '</ul>';
-		}
-
-	}
-
-
-}
+} // end compost
 
 
 function debuglog( $message ) {

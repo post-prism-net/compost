@@ -1,10 +1,10 @@
 <?php	
-// user
+// user settings
 c::set( 'user_name', 'martin' );
 c::set( 'user_pass', '1234' );
 c::set( 'user_display_name', 'Martin' );
 
-// paths
+// path settings
 c::set( 'path_meta', 'data/meta/' );
 c::set( 'path_images', 'data/images/' );
 c::set( 'path_templates', 'templates/' );
@@ -17,5 +17,5 @@ c::set( 'scale_maximum', 1 );
 c::set( 'scale_minimum', 0.75 );
 c::set( 'halflife', 100 );
 
-// render settings
+// template settings
 c::set( 'render_limit', 10 );
