@@ -5,37 +5,13 @@
 
 // ### VARIABLES ### 
 
-@bg: #d7d4cd;
-
-@text: #000;
-
-@link: @text;
-
-@font-one: 'Source Code Pro', Arial, sans-serif;
-@font-two: sans-serif;
-
-@line-height: 1.4;
-
-@opacity: 0.15;
-@opacity-hover: 0.3;
-
-@border: 1px solid rgba( 0,0,0, @opacity );
-
-@transition-duration: 250ms;
-
-@scrollbar-color: rgba( 0,0,0, @opacity );
-@scrollbar-color-alpha: 50%;
-@scrollbar-color-alpha-hover: 100%;
-
-@smaller-em: 48em;
-@smaller: ~'only screen and ( max-width: @{smaller-em} )';
-
 
 // ### IMPORTS ###
 
-@import url( http://fonts.googleapis.com/css?family=Source+Code+Pro:400,300,500,600 );
+@import '../../../global/css/global.less';
 
 // ### MIXINS ###
+
 
 
 
@@ -59,8 +35,8 @@ body {
   position: relative;
 
   font-family: @font-one;
-  font-size: 120%;
-  font-weight: 300;
+  font-size: @font-size-one;
+  font-weight: @font-weight-one;
   line-height: @line-height;
   
   color: @text;
@@ -488,14 +464,14 @@ li:hover .tools {
 
 .tools .delete {
 
+  border-bottom: 0;
+
   &::before {
     content: '\00D7';
   }
 }
 
 .tools .share {
-
-  border-top: 0;
 
   &::before {
     content: '\2665';
@@ -673,6 +649,7 @@ button,
 
 .uploadform:target {
   bottom: 0;
+  animation: attention 3s ease;
 }
 
 .uploadform > .close {
@@ -778,6 +755,20 @@ button,
 
   }
 
+}
+
+@keyframes attention {
+  0% {
+    box-shadow: none;
+  }
+
+  50% {
+    box-shadow: -2em 0 4em @color;
+  }
+
+  100% {
+    box-shadow: none;
+  } 
 }
 
 

@@ -13,7 +13,7 @@ html {
 html,
 body {
   margin: 0;
-  background: #d7d4cd;
+  background: #bdc3c3;
 }
 body {
   position: relative;
@@ -44,11 +44,11 @@ a:active {
 }
 ::-moz-selection {
   background: #000000;
-  color: #d7d4cd;
+  color: #bdc3c3;
 }
 ::selection {
   background: #000000;
-  color: #d7d4cd;
+  color: #bdc3c3;
 }
 h1,
 h2,
@@ -78,7 +78,7 @@ h1 {
   right: 0;
   top: 0;
   z-index: 13;
-  background: #d7d4cd;
+  background: #bdc3c3;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 nav {
@@ -177,7 +177,7 @@ p {
   display: none;
   padding: 0 0.5em 0 0;
   color: transparent;
-  background: #d7d4cd;
+  background: #bdc3c3;
   -webkit-transform: scaleX(0);
   -ms-transform: scaleX(0);
   transform: scaleX(0);
@@ -213,7 +213,7 @@ li:hover .tools {
   line-height: 1;
   text-align: center;
   text-indent: 100%;
-  background: #d7d4cd;
+  background: #bdc3c3;
   border: 1px solid rgba(0, 0, 0, 0.15);
   white-space: nowrap;
   overflow: hidden;
@@ -221,7 +221,7 @@ li:hover .tools {
 .tools > a:hover,
 .tools > a:active,
 .tools > a:focus {
-  background: #b5afa3;
+  background: #959f9f;
 }
 .tools > a::before {
   content: ' ';
@@ -233,11 +233,11 @@ li:hover .tools {
   text-align: center;
   text-indent: 0;
 }
+.tools .delete {
+  border-bottom: 0;
+}
 .tools .delete::before {
   content: '\00D7';
-}
-.tools .share {
-  border-top: 0;
 }
 .tools .share::before {
   content: '\2665';
@@ -368,7 +368,7 @@ button:focus,
     clear: both;
     float: none;
     margin-top: 1px;
-    background: #d7d4cd;
+    background: #bdc3c3;
     trabnsition: all 250ms ease;
   }
   .loginform:target {
@@ -393,13 +393,15 @@ button:focus,
   right: 0;
   z-index: 17;
   margin: 0;
-  background: #d7d4cd;
+  background: #bdc3c3;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
   -webkit-transition: all 250ms ease;
   transition: all 250ms ease;
 }
 .uploadform:target {
   bottom: 0;
+  -webkit-animation: attention 3s ease;
+  animation: attention 3s ease;
 }
 .uploadform > .close {
   float: right;
@@ -476,6 +478,34 @@ button:focus,
     border-bottom: 0;
   }
 }
+@-webkit-keyframes attention {
+  0% {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  50% {
+    -webkit-box-shadow: -2em 0 4em #2fe6ed;
+    box-shadow: -2em 0 4em #2fe6ed;
+  }
+  100% {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+@keyframes attention {
+  0% {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  50% {
+    -webkit-box-shadow: -2em 0 4em #2fe6ed;
+    box-shadow: -2em 0 4em #2fe6ed;
+  }
+  100% {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
 .messagelist {
   position: fixed;
   top: 25%;
@@ -492,7 +522,7 @@ button:focus,
   top: 0;
   margin: 0 0 1em 0;
   padding: 1em 4em;
-  background: #d7d4cd;
+  background: #bdc3c3;
   border: 1px solid rgba(0, 0, 0, 0.15);
   opacity: 1;
   -webkit-transition: all 250ms ease;
@@ -584,7 +614,7 @@ button:focus,
 ::-webkit-scrollbar {
   width: 0.6em;
   height: 0.6em;
-  background: #d7d4cd;
+  background: #bdc3c3;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
@@ -601,5 +631,5 @@ button:focus,
   background: transparent;
 }
 ::-webkit-scrollbar-corner {
-  background: #d7d4cd;
+  background: #bdc3c3;
 }
