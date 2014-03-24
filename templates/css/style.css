@@ -3,11 +3,6 @@
    This stylesheet was written in and compiled with LESS
    See http://lesscss.org for further reference
 */
-/**
-  * Global styles
-  *
-  *
-  */
 html {
   text-rendering: optimizeLegibility;
   -webkit-font-feature-settings: 'liga', 'dlig', 'kern';
@@ -48,12 +43,12 @@ a:active {
   outline: 0;
 }
 ::-moz-selection {
-  background: #000000;
-  color: #bdc3c3;
+  background: #2fe6ed;
+  color: #000000;
 }
 ::selection {
-  background: #000000;
-  color: #bdc3c3;
+  background: #2fe6ed;
+  color: #000000;
 }
 h1,
 h2,
@@ -245,7 +240,7 @@ li:hover .tools {
   content: '\00D7';
 }
 .tools .share::before {
-  content: '\2665';
+  content: '\2693';
 }
 .pagination {
   position: absolute;
@@ -257,12 +252,6 @@ li:hover .tools {
   line-height: 1;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
-/*
-.loggedin .pagination {
-  bottom: 3em;
-  margin-bottom: 6px;
-}
-*/
 .pagination > a {
   display: block;
   padding: 1em;

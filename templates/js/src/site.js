@@ -103,7 +103,7 @@ jQuery( function( $ ) {
                         .attr( 'src' );
 
                     e.preventDefault();
-                    modal.nu( 'share link: <br>' + url );
+                    modal.nu( 'direct link: <br>' + url );
 
                 } )
 
