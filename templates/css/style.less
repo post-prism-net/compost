@@ -3,16 +3,9 @@
    See http://lesscss.org for further reference
 */
 
-// ### VARIABLES ### 
-
-
 // ### IMPORTS ###
 
 @import '../../../global/css/global.less';
-
-// ### MIXINS ###
-
-
 
 
 // ### DOCUMENT ### 
@@ -67,14 +60,12 @@ a {
 }
 
 a:visited {
-  // color: desaturate( @link, 5% );
 }
 
 a:hover,
 a:focus,
 a:active {
   text-decoration: none;
-  // color: ;
   outline: 0; // do somethig else for a11y
 }
 
@@ -404,7 +395,6 @@ a:hover ~ .metalist .health > .chart > .number {
 }
 
 
-
 // tools
 
 .tools {
@@ -415,14 +405,11 @@ a:hover ~ .metalist .health > .chart > .number {
   margin: 0;
 
   opacity: 0;
-  // transform: scaleX( 0 );
-  // transform-origin: 100% 0;
   transition: all @transition-duration ease;
 }
 
 
 li:hover .tools {
-  // transform: scaleX( 1 );
   opacity: 1;
 }
 
@@ -492,13 +479,6 @@ li:hover .tools {
 
   border-top: @border;
 }
-
-/*
-.loggedin .pagination {
-  bottom: 3em;
-  margin-bottom: 6px;
-}
-*/
 
 .pagination > a {
   display: block;
@@ -954,13 +934,4 @@ button,
 
 ::-webkit-scrollbar-corner {
   background: @bg;
-}
-
-
-
-@media @smaller {
-
-
-
-
 }
