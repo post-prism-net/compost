@@ -4,7 +4,6 @@
  *
  * @version 0.1
  * @author Martin Wecke <martin@hatsumatsu.de>
- * @link 
  * @copyright Copyright 2014 Martin Wecke
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
@@ -14,7 +13,7 @@ include( 'kirby.php' );
 // session start
 s::start();
 
-// start app
+// init app
 compost::init();
 
 class compost {
@@ -227,8 +226,8 @@ class compost {
 		        $finfo->file( $_FILES['file']['tmp_name'] ),
 		        array(
 		            'jpg' => 'image/jpeg',
-		            'png' => 'image/png',
-		            'gif' => 'image/gif',
+		            'png' => 'image/png'
+		            /*'gif' => 'image/gif',*/
 		        ),
 		        true
 		    ) ) {
@@ -247,6 +246,11 @@ class compost {
 		        )
 		    ) ) {
 		        throw new RuntimeException( 'Failed to move uploaded file.' );
+		    }
+
+		    if( $ext == 'png' ) {
+		    	//convert PNG to JPEG
+		    	self::PNGtoJPEG( $id );
 		    }
 
 		    debuglog( 'File is uploaded successfully.' );
@@ -274,6 +278,7 @@ class compost {
 			$src_img = c::get( 'path_images' ) . $id . '.jpg';
 			$src_meta = c::get( 'path_meta' ) . $id . '.json';
 
+			// delete image and meta data
 			if( f::remove( $src_img ) 
 			 && f::remove( $src_meta ) ) {
 				$messages[] = 'deleted image.';
@@ -295,15 +300,17 @@ class compost {
 	  */
 	static function processImage( $id, $meta ) {
 
-		// open image
+		// logged in?
 		if( !self::is_loggedin() ) {
 
+			// block present?
 			if( c::get( 'block' ) && self::is_blocked( $id ) ) {
 				return;
 			}
 
 			$path =  c::get( 'path_images' ) . $id . '.jpg';
 
+			// open image
 		    if( $image = @ImageCreateFromJPEG( $path ) ) {
 
 		    	if( $meta['views'] < $meta['halflife'] ) {
@@ -356,6 +363,39 @@ class compost {
 
 		}
  
+	}
+
+	/**
+	 * Convert PNG image to JPEG and delete original 
+	 *
+	 * @param 	{int} 	id image ID
+	 */
+	static function PNGtoJPEG( $id ) {
+		
+		$path =  c::get( 'path_images' ) . $id . '.png';
+
+		// open image
+		if( $image = @ImageCreateFromPNG( $path ) ) {
+
+	    	// get size
+			$_size = getimagesize( $path );
+
+			$size = array();
+			$size['width'] = $_size[0];
+			$size['height'] = $_size[1];
+
+			$new_path = c::get( 'path_images' ) . $id . '.jpg';
+
+			$new_image = imagecreatetruecolor( $size['width'], $size['height'] );
+			imagecopyresampled( $new_image, $image, 0, 0, 0, 0, $size['width'], $size['height'], $size['width'], $size['height'] );
+	    	
+	    	// delete PNG image
+	    	if( @imagejpeg( $new_image, $new_path, 100 ) ) {
+	    		f::remove( c::get( 'path_images' ) . $id . '.png' );
+	    	}
+
+		}
+
 	}
 
 	/** 
