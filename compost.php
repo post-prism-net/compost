@@ -242,8 +242,6 @@ class compost {
 		    	self::PNGtoJPEG( $id );
 		    }
 
-		    debuglog( 'File is uploaded successfully.' );
-
 		    return true;
 
 		} catch ( RuntimeException $e ) {
@@ -315,15 +313,6 @@ class compost {
 					$quality = self::calculateQuality( $meta['halflife'], $meta['views'] );
 					$scale = self::calculateScale( $meta['halflife'], $meta['views'] );
 					$new_size = self::calculateSize( $size, $scale );
-
-					debuglog( '$quality["compression"] - ' . $quality['compression'] );
-					debuglog( '$scale["scale"] - ' . $scale['scale'] );
-					debuglog( '$size["width"] - ' . $size['width'] );
-					debuglog( '$size["height"] - ' . $size['height'] );
-					debuglog( '$new_size["width"] - ' . $new_size['width'] );
-					debuglog( '$new_size["height"] - ' . $new_size['height'] );
-
-
 
 					$new_image = imagecreatetruecolor( $new_size['width'], $new_size['height'] );
 					imagecopyresampled( $new_image, $image, 0, 0, 0, 0, $new_size['width'], $new_size['height'], $size['width'], $size['height'] );
@@ -767,11 +756,3 @@ class compost {
 	}
 
 } // end compost
-
-
-function debuglog( $message ) {
-	// echo $message;
-	// echo '<br>';
-	// echo '------------------------------------------------------';
-	// echo '<br>';
-}
