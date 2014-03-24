@@ -30,10 +30,8 @@ $health = ( $views > $halflife ) ? 0 : 100 - floor( $views / $halflife * 100 );
 			<span class="month"><?php echo date( 'm', $time ); ?>.</span>
 			<span class="day"><?php echo date( 'y', $time ); ?></span>
 		</li>
-	-->
+		-->
 		<li class="health"><span class="chart" data-health="<?php echo $health; ?>%"><span class="bar"></span><span class="number"><?php echo $health; ?>%</span></span></li>
 	</ul>
-
-	<p><?php echo compost::getMetaValue( $id, 'description' ) ?></p>
 
 </li>

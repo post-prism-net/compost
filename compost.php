@@ -298,6 +298,10 @@ class compost {
 		// open image
 		if( !self::is_loggedin() ) {
 
+			if( c::get( 'block' ) && self::is_blocked( $id ) ) {
+				return;
+			}
+
 			$path =  c::get( 'path_images' ) . $id . '.jpg';
 
 		    if( $image = @ImageCreateFromJPEG( $path ) ) {
@@ -330,11 +334,23 @@ class compost {
 
 			    	imagejpeg( $new_image, $path, $quality['compression'] );
 
+		    	} else {
+
+		    		// remove image after halflife
+		    		if( c::get( 'delete_after_halflife' ) ) {
+		    			self::deleteImage( $id );
+		    		} 
+
 		    	}
 
 				// increse view counter
 				$views = $meta['views'] + 1;
 				self::setMetaValue( $id, 'views', $views );
+
+				// set block cookie 
+				if( c::get( 'block' ) ) {
+					self::block( $id );
+				}
 
 		    }
 
@@ -688,6 +704,29 @@ class compost {
 			return false;
 		}
 
+	}
+
+	/**
+	  * Set block cookie
+	  *
+	  * @param 	{int} 	id image ID
+	  */
+	static function block( $id ) {
+		cookie::set( $id, 1, c::get( 'block_duration' ), self::getBaseUrl() );
+	}
+
+	/**
+	  * Check if block cookie is set 
+	  * 
+	  * @param 	{int} 	id image ID
+	  * @return {boolean} result
+	  */
+	static function is_blocked( $id ) {
+		if( cookie::get( $id ) ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
