@@ -3,8 +3,6 @@
  * compost
  *
  * @version 0.1
- * @author Martin Wecke <martin@hatsumatsu.de>
- * @copyright Copyright 2014 Martin Wecke
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
