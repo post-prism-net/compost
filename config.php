@@ -15,11 +15,11 @@ c::set( 'quality_maximum', 95 );
 c::set( 'quality_minimum', 1 );
 c::set( 'scale_maximum', 1 );
 c::set( 'scale_minimum', 0.75 );
-c::set( 'halflife', 100 );
+c::set( 'halflife', 5 );
 
 // function settings
 c::set( 'delete_after_halflife', true );
-c::set( 'block', true );
+c::set( 'block', false );
 c::set( 'block_duration', 3600 );
 
 // template settings

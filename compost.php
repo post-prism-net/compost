@@ -57,7 +57,7 @@ class compost {
 		// delete image
 		if( get( 'delete' ) ) {
 			$id = filter_var( get( 'delete' ), FILTER_SANITIZE_NUMBER_INT );
-			self::deleteImage( $id );
+			self::deleteImage( $id, false );
 		}
 
 		// stream image file
@@ -70,7 +70,13 @@ class compost {
 		// item 
 		if( get( 'id' ) ) {
 			$id = filter_var( get( 'id' ), FILTER_SANITIZE_NUMBER_INT );
-			self::templateItem( $id );
+
+			if( self::imageExists( $id ) ) {
+				self::templateItem( $id );
+			} else {
+				self::template404();
+			}
+
 		} else {
 			self::templateList();
 		}
@@ -255,19 +261,19 @@ class compost {
 	/** 
 	  * Delete image routine called by view controller 
 	  * 
-	  * @param 	int 	$id image ID
+	  * @param 	int 	 $id image ID 
+	  * @param 	boolean  $force skip login check
 	  */
-	static function deleteImage( $id ) {
+	static function deleteImage( $id, $force ) {
 		global $messages;
 
-		if( self::is_loggedin() ) {
+		if( self::is_loggedin() || $force ) {
 
 			$src_img = c::get( 'path_images' ) . $id . '.jpg';
 			$src_meta = c::get( 'path_meta' ) . $id . '.json';
 
 			// delete image and meta data
-			if( f::remove( $src_img ) 
-			 && f::remove( $src_meta ) ) {
+			if(  f::remove( $src_meta ) && f::remove( $src_img ) ) {
 				$messages[] = 'deleted image.';
 			} else {
 				$messages[] = 'error deleting image.';
@@ -295,7 +301,7 @@ class compost {
 				return;
 			}
 
-			$path =  c::get( 'path_images' ) . $id . '.jpg';
+			$path = c::get( 'path_images' ) . $id . '.jpg';
 
 			// open image
 		    if( $image = @ImageCreateFromJPEG( $path ) ) {
@@ -322,8 +328,10 @@ class compost {
 		    	} else {
 
 		    		// remove image after halflife
-		    		if( c::get( 'delete_after_halflife' ) ) {
-		    			self::deleteImage( $id );
+		    		if( c::get( 'delete_after_halflife' ) ) { 
+						
+						self::deleteImage( $id, true );
+
 		    		} 
 
 		    	}
@@ -466,6 +474,20 @@ class compost {
 	}
 
 	/** 
+	  * Cleanup after yourself
+	  *
+	  * @param 	int 	$id image ID
+	  */
+	static function cleanup( $id ) {
+			$src_img = c::get( 'path_images' ) . $id . '.jpg';
+			$src_meta = c::get( 'path_meta' ) . $id . '.json';
+
+			// delete image and meta data
+			f::remove( $src_meta );
+			f::remove( $src_img );
+	}
+
+	/** 
 	  * Render list
 	  * 
 	  */
@@ -485,6 +507,17 @@ class compost {
 		$view = 'item';
 
 		include( c::get( 'path_templates' ) . 'item.php' );
+	}
+
+	/** 
+	  * 404
+	  * 
+	  */
+	static function template404() {
+		global $view;
+		$view = 'item';
+
+		include( c::get( 'path_templates' ) . '404.php' );
 	}
 
 	/**
@@ -656,23 +689,43 @@ class compost {
 
 		if( $id ) { 
 
+			$meta = self::getMeta( $id );
+			self::processImage( $id, $meta );
+
 			$src = c::get( 'path_images' )  . $id . '.jpg';
 
-			if( file_exists( $src ) && is_readable( $src ) ) { 
-			
-				$meta = self::getMeta( $id );
-				self::processImage( $id, $meta );
+			if( !self::imageExists( $id ) ) { 
+				$src = c::get( 'path_templates' ) . 'img/dummy.jpg';
+				self::cleanup( $id );
+			}
 
-				header( 'Content-type: image/jpeg' ); 
-				header( 'Content-length: ' . filesize( $src ) ); 
+			header( 'Content-type: image/jpeg' ); 
+			header( 'Content-length: ' . filesize( $src ) ); 
 
-				$file = @fopen( $src, 'rb' ); 
+			$file = @fopen( $src, 'rb' ); 
 
-				if( $file ) { 
-					fpassthru( $file ); 
-					exit; 
-				} 
+			if( $file ) { 
+				fpassthru( $file ); 
+				exit; 
 			} 
+
+		}
+	}
+
+	/**
+	  * Checks if image file exists and is readable 
+	  * 
+	  *	@param 	int 	$id image ID
+	  * @return boolean
+	  */
+	static function imageExists( $id ) {
+
+		$src = c::get( 'path_images' ) . $id . '.jpg';
+
+		if( file_exists( $src ) && is_readable( $src ) ) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 
