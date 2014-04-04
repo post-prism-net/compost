@@ -2,6 +2,7 @@
 $time = compost::getMetaValue( $id, 'time' );
 $views = compost::getMetaValue( $id, 'views' );
 $halflife = compost::getMetaValue( $id, 'halflife' );
+$description = compost::getMetaValue( $id, 'description' );
 
 $health = ( $views > $halflife ) ? 0 : 100 - floor( $views / $halflife * 100 );
 
@@ -33,5 +34,9 @@ $health = ( $views > $halflife ) ? 0 : 100 - floor( $views / $halflife * 100 );
 		-->
 		<li class="health"><span class="chart" data-health="<?php echo $health; ?>%"><span class="bar"></span><span class="number"><?php echo $health; ?>%</span></span></li>
 	</ul>
+
+	<?php if( $description ) { ?>
+	<h3><a href="<?php echo compost::getbaseUrl(); ?>?id=<?php echo $id; ?>"><?php echo $description; ?></a></h3>
+	<?php } ?>
 
 </li>

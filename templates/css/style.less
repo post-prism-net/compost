@@ -11,6 +11,7 @@
 // ### DOCUMENT ### 
 
 html {
+  position: relative;
   // enhanced typography
   text-rendering: optimizeLegibility;
   font-feature-settings: 'liga', 'dlig', 'kern'; 
@@ -18,14 +19,14 @@ html {
 }
 
 html, body {
-  // min-height: 100%;
+  min-height: 100%;
   margin: 0;
   
   background: @bg;
 }
 
 body {
-  position: relative;
+  // position: relative;
 
   font-family: @font-one;
   font-size: @font-size-one;
@@ -193,7 +194,7 @@ h5 {
   width: 96%;
   max-width: 48em;
   margin: 0 auto;
-  padding: 6em 0 3em;
+  padding: 6em 0;
 }
 
 .head {
@@ -272,8 +273,10 @@ p + p {
 .imagelist {
   width: 100%;
   margin: 0;
-  padding: 10% 0 0 0;
+  padding: 6% 0;
   list-style-type: none;
+
+  .cf;
 }
 
 .item .imagelist {
@@ -283,8 +286,12 @@ p + p {
 .imagelist > li { 
   position: relative;
   clear: left;
-  margin: 0 0 25%;
+  margin: 0 0 26%;
   padding: 0;
+}
+
+.imagelist > li:last-child {
+  margin-bottom: 0;
 }
 
 .list .imagelist > li {
@@ -311,14 +318,70 @@ p + p {
   border: @border;
 }
 
+.imagelist > li > h3 {
+  line-height: @line-height;
+}
+
 .imagelist > li > p {
 
   margin: 0.6em 0 0 0;
 }
 
+// griod layout 
+
+.layout-grid {
+  padding: 6% 0 4% 0;
+}
+
+.layout-grid > li {
+  float: left; 
+  clear: none;
+  width: 30%;
+  margin: 0 1.16666% 2%;
+  padding: 0;
+}
+
+.layout-grid > li > a {
+  height: 10em;
+
+  overflow: hidden;  
+}
+
+.layout-grid > li img {
+  width: 200%;
+  max-width: 9999%;
+  height: auto;
+  margin: -25% 0 0 -50%;
+}
+
+.layout-grid > li > h3 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+
+  background: fade( @bg, 80% ); 
+
+  opacity: 0;
+
+  transition: all @transition-duration ease;
+} 
+
+.layout-grid > li:hover > h3 {
+  opacity: 1;
+}
+
+.layout-grid > li > h3 a {
+  display: block;
+  height: 100%;
+  padding: 1em 4em 0 1em;
+}
+
 // metalist 
 .metalist {
-  margin: 1em 0 0 0;
+  margin: 1em 0;
   padding: 0;
   list-style-type: none;
 } 
@@ -406,6 +469,7 @@ a:hover ~ .metalist .health > .chart > .number {
   position: absolute;
   left: 0;
   top: 0;
+  z-index: 3;
 
   margin: 0;
 
@@ -468,6 +532,11 @@ li:hover .tools {
   &::before {
     content: '\2693';
   }
+}
+
+.layout-grid > li .tools {
+  left: auto;
+  right: 0;
 }
 
 // pagination 
@@ -756,6 +825,11 @@ button,
   } 
 }
 
+// footer 
+
+.footer {
+  clear: both;
+}
 
 // messages 
 
