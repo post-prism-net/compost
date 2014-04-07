@@ -12,6 +12,12 @@
 	<link rel="stylesheet" type="text/css" href="templates/css/style.css">
 
 	<script type="text/javascript" src="templates/js/all.js"></script>
+
+	<meta property="og:site_name" content="compost:<?php echo c::get( 'user_display_name' ); ?>">
+	<?php if( compost::is_item() ) { ?>
+	<meta property="og:title" content="<?php echo compost::getMetaValue( $id, 'description' ) ?>">
+	<meta property="og:image" content="<?php echo compost::getImageUrl( $id ); ?>">
+	<?php } ?>
 </head>
 <?php 
 $classes = '';
