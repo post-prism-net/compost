@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html class="no-js">
 <head>
-	<title>compost:<?php echo c::get( 'user_display_name' ); ?></title>
+	<title>compost &gt; <?php echo c::get( 'user_display_name' ); ?></title>
 	<meta charset="utf-8">
 
     <meta name="HandheldFriendly" content="True">
@@ -13,7 +13,7 @@
 
 	<script type="text/javascript" src="templates/js/all.js"></script>
 
-	<meta property="og:site_name" content="compost:<?php echo c::get( 'user_display_name' ); ?>">
+	<meta property="og:site_name" content="compost &gt; <?php echo c::get( 'user_display_name' ); ?>">
 	<?php if( compost::is_item() ) { ?>
 	<meta property="og:title" content="<?php echo compost::getMetaValue( $id, 'description' ) ?>">
 	<meta property="og:image" content="<?php echo compost::getImageUrl( $id ); ?>">
@@ -37,6 +37,6 @@ if( compost::is_item() ) {
 <body class="<?php echo $classes; ?>">
 	<div class="shell">
 		<div class="head">
-			<h1><a href="<?php echo compost::getBaseUrl(); ?>">compost:<span class="username"><?php echo c::get( 'user_display_name' ); ?></span></a></h1>
+			<h1><a href="http://post-prism.net" title="learn more about compost." class="app_name">compost</a> &gt; <a href="<?php echo compost::getBaseUrl(); ?>" class="username" title="view all of <?php echo c::get( 'user_display_name' ); ?>'s images."><?php echo c::get( 'user_display_name' ); ?></a></h1>
 			<?php compost::renderTools(); ?>
 		</div>

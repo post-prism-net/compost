@@ -196,61 +196,61 @@ class compost {
 
 		try {
 		   
-		    if( !isset( $_FILES['file']['error'] ) 
-		    	|| is_array( $_FILES['file']['error'] ) ) {
-		        throw new RuntimeException( 'Invalid parameters.' );
-		    }
+			if( !isset( $_FILES['file']['error'] ) 
+				|| is_array( $_FILES['file']['error'] ) ) {
+				throw new RuntimeException( 'Invalid parameters.' );
+			}
 
-		    switch( $_FILES['file']['error'] ) {
-		        case UPLOAD_ERR_OK:
-		            break;
-		        case UPLOAD_ERR_NO_FILE:
-		            throw new RuntimeException( 'No file sent.' );
-		        case UPLOAD_ERR_INI_SIZE:
-		        case UPLOAD_ERR_FORM_SIZE:
-		            throw new RuntimeException( 'Exceeded filesize limit.' );
-		        default:
-		            throw new RuntimeException( 'Unknown errors.' );
-		    }
+			switch( $_FILES['file']['error'] ) {
+				case UPLOAD_ERR_OK:
+					break;
+				case UPLOAD_ERR_NO_FILE:
+					throw new RuntimeException( 'No file sent.' );
+				case UPLOAD_ERR_INI_SIZE:
+				case UPLOAD_ERR_FORM_SIZE:
+					throw new RuntimeException( 'Exceeded filesize limit.' );
+				default:
+					throw new RuntimeException( 'Unknown errors.' );
+			}
 
-		    if( $_FILES['file']['size'] > 20971520 ) {
-		        throw new RuntimeException( 'Exceeded filesize limit.' );
-		        $messages[] = 'File size too big.';
-		    }
+			if( $_FILES['file']['size'] > 20971520 ) {
+				throw new RuntimeException( 'Exceeded filesize limit.' );
+				$messages[] = 'File size too big.';
+			}
 
-		    $finfo = new finfo( FILEINFO_MIME_TYPE );
-		    if( false === $ext = array_search(
-		        $finfo->file( $_FILES['file']['tmp_name'] ),
-		        array(
-		            'jpg' => 'image/jpeg',
-		            'png' => 'image/png'
-		        ),
-		        true
-		    ) ) {
-		        throw new RuntimeException( 'Invalid file format.' );
-		    }
+			$finfo = new finfo( FILEINFO_MIME_TYPE );
+			if( false === $ext = array_search(
+				$finfo->file( $_FILES['file']['tmp_name'] ),
+				array(
+					'jpg' => 'image/jpeg',
+					'png' => 'image/png'
+				),
+				true
+			) ) {
+				throw new RuntimeException( 'Invalid file format.' );
+			}
 
-		    if( !move_uploaded_file(
-		        $_FILES['file']['tmp_name'],
-		        sprintf( '%s/%s.%s',
-		        	c::get( 'path_images' ),
-		            $id,
-		            $ext
-		        )
-		    ) ) {
-		        throw new RuntimeException( 'Failed to move uploaded file.' );
-		    }
+			if( !move_uploaded_file(
+				$_FILES['file']['tmp_name'],
+				sprintf( '%s/%s.%s',
+					c::get( 'path_images' ),
+					$id,
+					$ext
+				)
+			) ) {
+				throw new RuntimeException( 'Failed to move uploaded file.' );
+			}
 
-		    if( $ext == 'png' ) {
-		    	//convert PNG to JPEG
-		    	self::PNGtoJPEG( $id );
-		    }
+			if( $ext == 'png' ) {
+				//convert PNG to JPEG
+				self::PNGtoJPEG( $id );
+			}
 
-		    return true;
+			return true;
 
 		} catch ( RuntimeException $e ) {
 
-		    echo $e->getMessage();
+			echo $e->getMessage();
 
 		}
 
@@ -302,11 +302,11 @@ class compost {
 			$path = c::get( 'path_images' ) . $id . '.jpg';
 
 			// open image
-		    if( $image = @ImageCreateFromJPEG( $path ) ) {
+			if( $image = @ImageCreateFromJPEG( $path ) ) {
 
-		    	if( $meta['views'] < $meta['halflife'] ) {
+				if( $meta['views'] < $meta['halflife'] ) {
 
-			    	// get size
+					// get size
 					$_size = getimagesize( $path );
 
 
@@ -321,18 +321,18 @@ class compost {
 					$new_image = imagecreatetruecolor( $new_size['width'], $new_size['height'] );
 					imagecopyresampled( $new_image, $image, 0, 0, 0, 0, $new_size['width'], $new_size['height'], $size['width'], $size['height'] );
 
-			    	imagejpeg( $new_image, $path, $quality['compression'] );
+					imagejpeg( $new_image, $path, $quality['compression'] );
 
-		    	} else {
+				} else {
 
-		    		// remove image after halflife
-		    		if( c::get( 'delete_after_halflife' ) ) { 
+					// remove image after halflife
+					if( c::get( 'delete_after_halflife' ) ) { 
 						
 						self::deleteImage( $id, true );
 
-		    		} 
+					} 
 
-		    	}
+				}
 
 				// increse view counter
 				$views = $meta['views'] + 1;
@@ -343,7 +343,7 @@ class compost {
 					self::block( $id );
 				}
 
-		    }
+			}
 
 		}
  
@@ -361,7 +361,7 @@ class compost {
 		// open image
 		if( $image = @ImageCreateFromPNG( $path ) ) {
 
-	    	// get size
+			// get size
 			$_size = getimagesize( $path );
 
 			$size = array();
@@ -372,11 +372,11 @@ class compost {
 
 			$new_image = imagecreatetruecolor( $size['width'], $size['height'] );
 			imagecopyresampled( $new_image, $image, 0, 0, 0, 0, $size['width'], $size['height'], $size['width'], $size['height'] );
-	    	
-	    	// delete PNG image
-	    	if( @imagejpeg( $new_image, $new_path, 100 ) ) {
-	    		f::remove( c::get( 'path_images' ) . $id . '.png' );
-	    	}
+			
+			// delete PNG image
+			if( @imagejpeg( $new_image, $new_path, 100 ) ) {
+				f::remove( c::get( 'path_images' ) . $id . '.png' );
+			}
 
 		}
 
@@ -451,17 +451,17 @@ class compost {
 
 			$ratio = $width / $height;
 
-		    if( $width <= c::get( 'image_width' ) && isset( $scale ) ) {
+			if( $width <= c::get( 'image_width' ) && isset( $scale ) ) {
 
-		    	$new_width = round( c::get( 'image_width' ) * $scale['scale'] );
-		    	$new_height = round( $new_width / $ratio );
+				$new_width = round( c::get( 'image_width' ) * $scale['scale'] );
+				$new_height = round( $new_width / $ratio );
 
-		    } else {
+			} else {
 
-		    	$new_width = c::get( 'image_width' );
-		    	$new_height = round( $new_width / $ratio );
+				$new_width = c::get( 'image_width' );
+				$new_height = round( $new_width / $ratio );
 
-		    }
+			}
 
 
 		$size = array();
@@ -671,9 +671,14 @@ class compost {
 	  *	@return string 	app URL
 	  */
 	static function getBaseUrl() {
-	  $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? 'https://' : 'http://';
-	  $path = explode( '?', $_SERVER['REQUEST_URI'], 2 );
-	  $url = $protocol . $_SERVER['HTTP_HOST'] . $path[0];
+
+		if( c::get( 'app_root' ) ) {
+			$url = c::get( 'app_root' );
+	  	} else {
+			$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? 'https://' : 'http://';
+			$path = explode( '?', $_SERVER['REQUEST_URI'], 2 );
+			$url = $protocol . $_SERVER['HTTP_HOST'] . $path[0] . '/';
+		}
 
 	  return $url;
 	}

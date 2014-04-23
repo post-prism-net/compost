@@ -1,4 +1,7 @@
 <?php	
+
+c::set( 'app_root', 'http://localhost/post-prism/compost/' );
+
 // user settings
 c::set( 'user_name', 'martin' );
 c::set( 'user_pass', '1234' );

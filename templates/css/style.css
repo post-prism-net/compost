@@ -15,7 +15,7 @@ html,
 body {
   min-height: 100%;
   margin: 0;
-  background: #bdc3c3;
+  background: #d2d2cd;
 }
 body {
   font-family: 'Source Code Pro', Arial, sans-serif;
@@ -79,8 +79,19 @@ h1 {
   right: 0;
   top: 0;
   z-index: 13;
-  background: #bdc3c3;
+  background: #d2d2cd;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.app_name::after {
+  content: '?';
+  display: inline-block;
+  width: 0;
+  vertical-align: bottom;
+  overflow: hidden;
+}
+.app_name:hover::after,
+.app_name:focus::after {
+  width: 1em;
 }
 nav {
   float: right;
@@ -108,6 +119,12 @@ nav > a.login {
 }
 p {
   margin: 0 0 0em 0;
+}
+.not-found {
+  padding: 0.25em 0 0 0;
+  font-size: 1600%;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.2);
 }
 .imagelist {
   width: 100%;
@@ -185,7 +202,7 @@ p {
   top: 0;
   bottom: 0;
   z-index: 1;
-  background: rgba(189, 195, 195, 0.8);
+  background: rgba(210, 210, 205, 0.8);
   opacity: 0;
   -webkit-transition: all 250ms ease;
   transition: all 250ms ease;
@@ -234,7 +251,7 @@ p {
   display: none;
   padding: 0 0.5em 0 0;
   color: transparent;
-  background: #bdc3c3;
+  background: #d2d2cd;
   -webkit-transform: scaleX(0);
   -ms-transform: scaleX(0);
   transform: scaleX(0);
@@ -271,7 +288,7 @@ li:hover .tools {
   line-height: 1;
   text-align: center;
   text-indent: 100%;
-  background: #bdc3c3;
+  background: #d2d2cd;
   border: 1px solid rgba(0, 0, 0, 0.2);
   white-space: nowrap;
   overflow: hidden;
@@ -279,7 +296,7 @@ li:hover .tools {
 .tools > a:hover,
 .tools > a:active,
 .tools > a:focus {
-  background: #889292;
+  background: #a2a297;
 }
 .tools > a::before {
   content: ' ';
@@ -424,7 +441,7 @@ button:focus,
     clear: both;
     float: none;
     margin-top: 1px;
-    background: #bdc3c3;
+    background: #d2d2cd;
     trabnsition: all 250ms ease;
   }
   .loginform:target {
@@ -449,7 +466,7 @@ button:focus,
   right: 0;
   z-index: 17;
   margin: 0;
-  background: #bdc3c3;
+  background: #d2d2cd;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   -webkit-transition: all 250ms ease;
   transition: all 250ms ease;
@@ -581,7 +598,7 @@ button:focus,
   top: 0;
   margin: 0 0 1em 0;
   padding: 1em 4em;
-  background: #bdc3c3;
+  background: #d2d2cd;
   border: 1px solid rgba(0, 0, 0, 0.2);
   opacity: 1;
   -webkit-transition: all 250ms ease;
@@ -673,7 +690,7 @@ button:focus,
 ::-webkit-scrollbar {
   width: 0.6em;
   height: 0.6em;
-  background: #bdc3c3;
+  background: #d2d2cd;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
@@ -690,5 +707,5 @@ button:focus,
   background: transparent;
 }
 ::-webkit-scrollbar-corner {
-  background: #bdc3c3;
+  background: #d2d2cd;
 }
