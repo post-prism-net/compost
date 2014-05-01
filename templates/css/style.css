@@ -281,6 +281,7 @@ li:hover .tools {
   opacity: 1;
 }
 .tools > a {
+  position: relative;
   display: block;
   width: 3em;
   height: 1em;
@@ -316,6 +317,13 @@ li:hover .tools {
 }
 .tools .share::before {
   content: '\2693';
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  height: 100%;
+  text-indent: -3em;
+  background: url(../img/icon-anchor.svg ) center center no-repeat;
 }
 .layout-grid > li .tools {
   left: auto;
@@ -694,6 +702,7 @@ button:focus,
 }
 ::-webkit-scrollbar-track {
   background: transparent;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
 }
 ::-webkit-scrollbar-track-piece {
   background: transparent;

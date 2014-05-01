@@ -509,6 +509,7 @@ li:hover .tools {
 }
 
 .tools > a {
+  position: relative;
   display: block;
   width: 3em;
   height: 1em;
@@ -557,6 +558,16 @@ li:hover .tools {
 
   &::before {
     content: '\2693';
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    display: block;
+    height: 100%;
+
+    text-indent: -3em;
+
+    background: url( ../img/icon-anchor.svg ) center center no-repeat;
   }
 }
 
@@ -1001,6 +1012,7 @@ button,
  
 ::-webkit-scrollbar-track {
   background: transparent;
+  border-left: 1px solid @scrollbar-color;
 }
 
 ::-webkit-scrollbar-track-piece {
