@@ -13,11 +13,17 @@
 
 	<script type="text/javascript" src="templates/js/all.js"></script>
 
+    <!-- eat this -->
 	<meta property="og:site_name" content="compost &gt; <?php echo c::get( 'user_display_name' ); ?>">
 	<?php if( compost::is_item() ) { ?>
 	<meta property="og:title" content="<?php echo compost::getMetaValue( $id, 'description' ) ?>">
 	<meta property="og:image" content="<?php echo compost::getImageUrl( $id ); ?>">
-	<?php } ?>
+	<?php } else { ?>
+    <meta property="og:image" content="http://post-prism.net/compost/templates/img/preview.png">
+    <?php } ?>
+    <!-- -->
+
+    <link rel="icon" href="img/favicon-16.png" type="image/png">
 </head>
 <?php 
 $classes = '';

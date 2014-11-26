@@ -93,6 +93,14 @@ module.exports = function(grunt){
 		    js: {
 		    	files: ['js/src/**/*.js'],
 		    	tasks: ['buildjs']
+		    },
+		    img_raster: {
+		    	files: ['img/src/**.{jpg,jpeg,gif,png}'],
+		    	tasks: ['buildimages_raster']
+		    },
+		    img_vector: {
+		    	files: ['img/src/**.svg'],
+		    	tasks: ['buildimages_vector']
 		    }
 		}
 
@@ -105,6 +113,8 @@ module.exports = function(grunt){
 	grunt.registerTask( 'buildmodernizr', ['modernizr'] );
 	grunt.registerTask( 'buildjs',  ['uglify'] );
 	grunt.registerTask( 'buildimages',  ['imagemin', 'svgmin', 'svg2png'] );
-
+	grunt.registerTask( 'buildimages_raster',  ['imagemin'] );
+	grunt.registerTask( 'buildimages_vector',  ['svgmin', 'svg2png'] );
+	
 	grunt.registerTask( 'build',  ['buildcss', 'buildmodernizr', 'buildjs', 'buildimages'] );
 };

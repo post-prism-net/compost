@@ -22,7 +22,7 @@ c::set( 'halflife', 50 );
 
 // function settings
 c::set( 'delete_after_halflife', true );
-c::set( 'block', true );
+c::set( 'block', false );
 c::set( 'block_duration', 3600 );
 
 // template settings
