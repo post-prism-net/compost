@@ -23,7 +23,7 @@
     <?php } ?>
     <!-- -->
 
-    <link rel="icon" href="img/favicon-16.png" type="image/png">
+    <link rel="icon" href="templates/img/favicon-16.png" type="image/png">
 </head>
 <?php 
 $classes = '';

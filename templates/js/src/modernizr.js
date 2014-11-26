@@ -1,5 +1,5 @@
 /* Modernizr (Custom Build) | MIT & BSD
- * Build: http://modernizr.com/download/#-shiv-load-mq-cssclasses
+ * Build: http://modernizr.com/download/#-shiv-load-mq-cssclasses-svg
  */
 ;
 
@@ -7,7 +7,7 @@
 
 window.Modernizr = (function( window, document, undefined ) {
 
-    var version = '2.7.2',
+    var version = '2.8.3',
 
     Modernizr = {},
 
@@ -22,7 +22,13 @@ window.Modernizr = (function( window, document, undefined ) {
     inputElem  ,
 
 
-    toString = {}.toString,    tests = {},
+    toString = {}.toString,
+
+
+
+    ns = {'svg': 'http://www.w3.org/2000/svg'},
+
+    tests = {},
     inputs = {},
     attrs = {},
 
@@ -76,7 +82,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
       var matchMedia = window.matchMedia || window.msMatchMedia;
       if ( matchMedia ) {
-        return matchMedia(mq).matches;
+        return matchMedia(mq) && matchMedia(mq).matches || false;
       }
 
       var bool;
@@ -179,6 +185,9 @@ window.Modernizr = (function( window, document, undefined ) {
         }
         return false;
     }
+    tests['svg'] = function() {
+        return !!document.createElementNS && !!document.createElementNS(ns.svg, 'svg').createSVGRect;
+    };
     for ( var feature in tests ) {
         if ( hasOwnProp(tests, feature) ) {
                                     featureName  = feature.toLowerCase();
